@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Installment Plan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            font-size: 14px;
+            color: #555;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type="number"] {
+            font-size: 16px;
+        }
+
+        hr {
+            border: 1px solid #eee;
+            margin: 10px 0;
+        }
+
+        .result {
+            margin-top: 20px;
+        }
+
+        .result h2 {
+            font-size: 16px;
+            color: #333;
+            margin: 8px 0;
+        }
+
+        .result span {
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Installment Plan</h1>
+
+    <label for="mprice">Mobile Price:</label>
+    <input type="number" id="mprice" placeholder="Enter mobile price">
+
+    <label for="interest">Interest Rate (%):</label>
+    <input type="number" id="interest" placeholder="Enter interest rate">
+
+    <label for="month">Months:</label>
+    <input type="number" id="month" placeholder="Enter number of months">
+
+    <button class="btn" onclick="calculateInstallment()">Calculate</button>
+
+    <div class="result">
+        <h2>Mobile Price: <span id="d-price"></span></h2>
+        <h2>Interest: <span id="d-int"></span></h2>
+        <h2>Months: <span id="d-month"></span></h2>
+        <h2>Total Cost: <span id="totalcost"></span></h2>
+        <h2>Per Month: <span id="per-month"></span></h2>
+    </div>
+</div>
+
+<script>
+    function calculateInstallment() {
+        var mprice = parseFloat(document.getElementById("mprice").value);
+        var interest = parseFloat(document.getElementById("interest").value);
+        var month = parseInt(document.getElementById("month").value);
+
+        if (isNaN(mprice) || isNaN(interest) || isNaN(month) || month <= 0) {
+            alert("Please enter valid values.");
+            return;
+        }
+
+        var totalInterest = (mprice * interest) / 100;
+        var totalCost = mprice + totalInterest;
+        var perMonth = totalCost / month;
+
+        document.getElementById("d-price").textContent = mprice.toFixed(2);
+        document.getElementById("d-int").textContent = totalInterest.toFixed(2);
+        document.getElementById("d-month").textContent = month;
+        document.getElementById("totalcost").textContent = totalCost.toFixed(2);
+        document.getElementById("per-month").textContent = perMonth.toFixed(2);
+    }
+</script>
+
+</body>
+<script src="/scrpt.js"></script>
+</html>
